@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 3 - Integración Numérica</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <script src="../handleMenu.js"></script>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-1" href="#">Métodos Numéricos II</a>
+        </div>
+    </nav>
+    <section id="introduccion">
+        <div class="container text-center mt-5 pt-5" style="max-width: 900px;">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                    <div class="custom-box" align="justify">
+                        <h2 class="mb-4">Unidad III: Integración Numérica</h2>
+                        <p>
+                            En esta unidad se estudian los métodos numéricos para aproximar el valor de integrales
+                            definidas,
+                            herramientas fundamentales en cálculo numérico cuando no es posible o es muy complejo
+                            calcular
+                            la integral analíticamente.
+                        </p>
+                        <p>
+                            La <strong>integración numérica</strong> consiste en aproximar el área bajo la curva de una
+                            función
+                            mediante diferentes técnicas. Se exploran métodos basados en polinomios interpolantes como
+                            la
+                            <strong>regla del Trapecio</strong>, <strong>Simpson 1/3</strong> y <strong>Simpson
+                                3/8</strong>,
+                            analizando su precisión, condiciones de aplicación y error asociado.
+                        </p>
+                        <p>
+                            La <strong>regla del Trapecio</strong> aproxima el área bajo la curva mediante trapecios,
+                            siendo
+                            el método más simple pero menos preciso. La <strong>regla de Simpson 1/3</strong> utiliza
+                            polinomios de segundo grado para obtener mayor precisión, mientras que la <strong>regla de
+                                Simpson 3/8</strong> emplea polinomios de tercer grado para casos que requieren mayor
+                            exactitud.
+                        </p>
+                        <p>
+                            También se discute el concepto de <em>error de truncamiento</em> en cada método y cómo
+                            la aplicación de estas reglas en forma compuesta (dividiendo el intervalo en subintervalos)
+                            puede mejorar significativamente la precisión de la aproximación.
+                        </p>
+                        <p>
+                            Finalmente, se implementan estos algoritmos en herramientas computacionales para comparar
+                            su eficiencia y precisión en diferentes casos de estudio.
+                        </p>
+                        <p>
+                            Puntos principales:
+                        </p>
+                        <ul>
+                            <li>Comprender los fundamentos de la integración numérica y su importancia.</li>
+                            <li>Aplicar los métodos del Trapecio, Simpson 1/3 y Simpson 3/8 para aproximar integrales
+                                definidas.</li>
+                            <li>Calcular y analizar el error asociado a cada método.</li>
+                            <li>Implementar las reglas de integración en su forma simple y compuesta.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="../menu-principal.html" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="siguiente" class="btn btn-dark">SIGUIENTE</button>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="menu">
+        <div class="container contenedor text-center mt-5 pt-5" style="max-width: 900px;">
+            <div class="container mt-2">
+                <div class="d-flex justify-content-right mb-5">
+                    <button id="volver" class="btn btn-light" style="width: 80px; height: 70px;"><img
+                            src="../img/atras.png" alt="" srcset="" style="width: 50px; height: 50px;"></button>
+                </div>
+                <h1 class="text-center mb-4">Unidad III: Integración Numérica</h1>
+
+                <div class="d-flex justify-content-center gap-5 mb-4 w-100">
+                    <div class="row">
+                        <div class="col mb-3"><button class="btn btn-primary" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('trapecio')">Regla del Trapecio</button></div>
+                        <div class="col mb-3"><button class="btn btn-warning" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('simpson13')">Simpson 1/3</button></div>
+                        <div class="col mb-3"><button class="btn btn-success" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('simpson38')">Simpson 3/8</button></div>
+                    </div>
+                </div>
+
+                <!-- Regla del Trapecio -->
+                <div id="trapecio" class="metodo text-start" style="display: none;">
+                    <div class="container">
+                        <div class="bg-white p-5 shadow rounded-4">
+                            <h1 class="text-primary mb-4">Regla del Trapecio</h1>
+
+                            <p>
+                                La regla del Trapecio es el método más simple de integración numérica, que aproxima
+                                el área bajo la curva de una función \( f(x) \) mediante trapecios.
+                            </p>
+
+                            <h4 class="section-title">Fórmula del Trapecio Simple</h4>
+                            <div class="formula-box">
+                                \[
+                                \int_{a}^{b} f(x) \,dx \approx \frac{b - a}{2} [f(a) + f(b)]
+                                \]
+                            </div>
+
+                            <h4 class="section-title">Fórmula del Trapecio Compuesto</h4>
+                            <div class="formula-box">
+                                \[
+                                \int_{a}^{b} f(x) \,dx \approx \frac{h}{2} \left[ f(a) + 2 \sum_{i=1}^{n-1} f(x_i) +
+                                f(b) \right]
+                                \]
+                                <p>donde \( h = \frac{b - a}{n} \) y \( x_i = a + i \cdot h \)</p>
+                            </div>
+
+                            <h4 class="section-title">Error de Truncamiento</h4>
+                            <div class="formula-box">
+                                \[
+                                E_T = -\frac{(b - a)^3}{12n^2} f''(\xi), \quad \xi \in [a, b]
+                                \]
+                            </div>
+
+                            <h4 class="section-title">Ventajas</h4>
+                            <ul>
+                                <li>Fácil de implementar y entender.</li>
+                                <li>Útil para funciones suaves o cuando se requiere una aproximación rápida.</li>
+                            </ul>
+
+                            <h4 class="section-title">Desventajas</h4>
+                            <ul>
+                                <li>Menor precisión que otros métodos para el mismo número de puntos.</li>
+                                <li>Error grande para funciones con alta curvatura.</li>
+                            </ul>
+
+                            <h4 class="section-title">Aplicaciones</h4>
+                            <ul>
+                                <li>Cálculo aproximado de áreas en ingeniería.</li>
+                                <li>Primera aproximación en problemas de integración.</li>
+                                <li>Base para métodos más complejos.</li>
+                            </ul>
+                            <div class="d-flex justify-content-center">
+                                <a href="trapecio.html" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simpson 1/3 -->
+                <div id="simpson13" class="metodo" style="display: none;">
+                    <div class="container">
+                        <div class="container py-5">
+                            <div class="bg-white p-5 shadow rounded-4">
+                                <h1 class="text-warning mb-4">Regla de Simpson 1/3</h1>
+
+                                <p>
+                                    La regla de Simpson 1/3 aproxima la integral de una función mediante la
+                                    interpolación
+                                    con polinomios de segundo grado (parábolas), ofreciendo mayor precisión que el
+                                    método
+                                    del Trapecio.
+                                </p>
+
+                                <h4 class="section-title-2">Fórmula de Simpson 1/3 Simple</h4>
+                                <div class="formula-box-2 table-responsive">
+                                    \[
+                                    \int_{a}^{b} f(x) \,dx \approx \frac{h}{3} [f(a) + 4f\left(\frac{a+b}{2}\right) +
+                                    f(b)]
+                                    \]
+                                    <p>donde \( h = \frac{b - a}{2} \)</p>
+                                </div>
+
+                                <h4 class="section-title-2">Fórmula de Simpson 1/3 Compuesta</h4>
+                                <div class="formula-box-2">
+                                    \[
+                                    \int_{a}^{b} f(x) \,dx \approx \frac{h}{3} \left[ f(a) + 4 \sum_{\substack{i=1 \\ i
+                                    \text{ impar}}}^{n-1} f(x_i) + 2 \sum_{\substack{i=2 \\ i \text{ par}}}^{n-2} f(x_i)
+                                    + f(b) \right]
+                                    \]
+                                    <p>donde \( h = \frac{b - a}{n} \) (n debe ser par)</p>
+                                </div>
+
+                                <h4 class="section-title-2">Error de Truncamiento</h4>
+                                <div class="formula-box-2">
+                                    \[
+                                    E_S = -\frac{(b - a)^5}{180n^4} f^{(4)}(\xi), \quad \xi \in [a, b]
+                                    \]
+                                </div>
+
+                                <h4 class="section-title-2">Ventajas</h4>
+                                <ul class="text-start">
+                                    <li>Mayor precisión que el método del Trapecio para el mismo número de puntos.</li>
+                                    <li>Eficiente para funciones suaves y polinómicas de grado ≤ 3.</li>
+                                </ul>
+
+                                <h4 class="section-title-2">Desventajas</h4>
+                                <ul class="text-start">
+                                    <li>Requiere un número par de intervalos.</li>
+                                    <li>Precisión disminuye para funciones con alta variación.</li>
+                                </ul>
+
+                                <h4 class="section-title-2">Aplicaciones</h4>
+                                <ul class="text-start">
+                                    <li>Cálculo de áreas en física e ingeniería.</li>
+                                    <li>Problemas donde se requiere mayor precisión que el Trapecio.</li>
+                                    <li>Integración de funciones experimentales.</li>
+                                </ul>
+                                <div class="d-flex justify-content-center">
+                                    <a href="./simpson13.html" class="btn btn-warning">SIGUIENTE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simpson 3/8 -->
+                <div id="simpson38" class="metodo" style="display: none;">
+                    <div class="container">
+                        <div class="container py-5">
+                            <div class="bg-white p-5 shadow rounded-4">
+                                <h2 class="text-success">Regla de Simpson 3/8</h2>
+
+                                <p>
+                                    La regla de Simpson 3/8 utiliza polinomios de tercer grado para aproximar la
+                                    integral,
+                                    ofreciendo una alternativa cuando el número de intervalos es múltiplo de tres.
+                                </p>
+
+                                <h4 class="section-title-3">Fórmula de Simpson 3/8 Simple</h4>
+                                <div class="formula-box-3">
+                                    \[
+                                    \int_{a}^{b} f(x) \,dx \approx \frac{3h}{8} [f(a) + 3f(a+h) + 3f(a+2h) + f(b)]
+                                    \]
+                                    <p>donde \( h = \frac{b - a}{3} \)</p>
+                                </div>
+
+                                <h4 class="section-title-3">Fórmula de Simpson 3/8 Compuesta</h4>
+                                <div class="formula-box-3">
+                                    \[
+                                    \int_{a}^{b} f(x) \,dx \approx \frac{3h}{8} \left[ f(a) + 3 \sum_{\substack{i=1 \\ i
+                                    \not\equiv 0 \mod 3}}^{n-1} f(x_i) + 2 \sum_{\substack{i=3 \\ i \equiv 0 \mod
+                                    3}}^{n-3} f(x_i) + f(b) \right]
+                                    \]
+                                    <p>donde \( h = \frac{b - a}{n} \) (n debe ser múltiplo de 3)</p>
+                                </div>
+
+                                <h4 class="section-title-3">Error de Truncamiento</h4>
+                                <div class="formula-box-3">
+                                    \[
+                                    E_{S38} = -\frac{(b - a)^5}{6480n^4} f^{(4)}(\xi), \quad \xi \in [a, b]
+                                    \]
+                                </div>
+
+                                <h4 class="section-title-3">Ventajas</h4>
+                                <ul class="text-start">
+                                    <li>Mayor precisión que el Trapecio y comparable a Simpson 1/3.</li>
+                                    <li>Útil cuando el número de intervalos es múltiplo de 3.</li>
+                                </ul>
+
+                                <h4 class="section-title-3">Desventajas</h4>
+                                <ul class="text-start">
+                                    <li>Requiere más evaluaciones de la función que Simpson 1/3 para similar precisión.
+                                    </li>
+                                    <li>Menos utilizada que Simpson 1/3 en la práctica.</li>
+                                </ul>
+
+                                <h4 class="section-title-3">Aplicaciones</h4>
+                                <ul class="text-start">
+                                    <li>Cuando se tienen datos cada tres intervalos.</li>
+                                    <li>Como complemento a Simpson 1/3 en métodos adaptativos.</li>
+                                    <li>Problemas específicos donde se ajusta mejor al número de puntos.</li>
+                                </ul>
+                                <div class="d-flex justify-content-center">
+                                    <a href="simpson38.html" class="btn btn-success">SIGUIENTE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

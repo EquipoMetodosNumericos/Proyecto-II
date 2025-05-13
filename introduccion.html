@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda Página</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.2/math.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <script src="handleMenu.js"></script>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Proyecto Métodos Numéricos II</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./unidad 1/unidad1.html">Unidad I</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./unidad 2/unidad2.html">Unidad II</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./unidad 3/unidad3.html">Unidad III</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="despedida.html">Despedida</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <div class="container text-center mt-5 pt-5" style="max-width: 900px;">
+        <div class="row">
+            <div class="col-md-12" align="left">
+                <div class="custom-box" align="center">
+                    <h1>INTRODUCCION</h1>
+                    <h2>Selecciona la unidad para ver una introducción</h2>
+                    <br>
+                    <button type="button" id="btn-unidad-1" class="btn btn-primary">UNIDAD I</button>
+                    <br>
+                    <br>
+                    <button type="button" id="btn-unidad-2" class="btn btn-warning">UNIDAD II</button>
+                    <br>
+                    <br>
+                    <button type="button" id="btn-unidad-3" class="btn btn-success">UNIDAD III</button>
+
+                </div>
+                <br>
+                <div class="modal" tabindex="-1" id="modal-unidad-1">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">UNIDAD I</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container py-5">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="custom-box">
+                                                <h1 class="text-center mb-4">Resolución Numérica de Sistemas de
+                                                    Ecuaciones No Lineales
+                                                </h1>
+
+                                                <p class="lead">
+                                                    Los sistemas de ecuaciones no lineales son comunes en modelado
+                                                    matemático y
+                                                    requieren métodos numéricos para su solución cuando no es posible
+                                                    resolverlos
+                                                    analíticamente.
+                                                </p>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-6">
+                                                        <div class="custom-box">
+                                                            <h2 class="section-title">Método de Punto Fijo</h2>
+
+                                                            <p>También conocido como método de sustitución sucesiva,
+                                                                transforma el
+                                                                sistema original en uno equivalente:</p>
+
+                                                            <div class="formula-box">
+                                                                \[
+                                                                \mathbf{x} = \mathbf{G}(\mathbf{x})
+                                                                \]
+                                                                <p>donde \(\mathbf{x} = (x_1, x_2, \dots, x_n)^T\) y
+                                                                    \(\mathbf{G}\) es
+                                                                    la función de iteración.</p>
+                                                            </div>
+
+                                                            <h4 class="section-title">Algoritmo Iterativo</h4>
+                                                            <div class="formula-box">
+                                                                \[
+                                                                \mathbf{x}^{(k+1)} = \mathbf{G}(\mathbf{x}^{(k)})
+                                                                \]
+                                                            </div>
+
+                                                            <h4 class="section-title">Condición de Convergencia</h4>
+                                                            <div class="formula-box table-responsive">
+                                                                \[
+                                                                \|\mathbf{G}'(\mathbf{x})\| < 1 \quad \text{en una
+                                                                    vecindad de la solución} \] </div>
+
+                                                                    <h4 class="section-title">Ventajas</h4>
+                                                                    <ul>
+                                                                        <li>Simple de implementar</li>
+                                                                        <li>No requiere cálculo de derivadas</li>
+                                                                        <li>Puede converger rápidamente si
+                                                                            \(\mathbf{G}\) está bien
+                                                                            elegida</li>
+                                                                    </ul>
+
+                                                                    <h4 class="section-title">Desventajas</h4>
+                                                                    <ul>
+                                                                        <li>La convergencia no está garantizada</li>
+                                                                        <li>La elección de \(\mathbf{G}\) es crucial
+                                                                        </li>
+                                                                        <li>Puede converger lentamente</li>
+                                                                    </ul>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="custom-box">
+                                                                <h2 class="section-title-2">Método de Newton-Raphson
+                                                                </h2>
+
+                                                                <p>Método basado en la linealización del sistema
+                                                                    mediante series de
+                                                                    Taylor:</p>
+
+                                                                <div class="formula-box-2">
+                                                                    \[
+                                                                    \mathbf{F}(\mathbf{x}) = \mathbf{0}
+                                                                    \]
+                                                                    <p>donde \(\mathbf{F} = (f_1, f_2, \dots, f_n)^T\)
+                                                                        es el sistema
+                                                                        original.</p>
+                                                                </div>
+
+                                                                <h4 class="section-title-2">Algoritmo Iterativo</h4>
+                                                                <div class="formula-box-2">
+                                                                    \[
+                                                                    \mathbf{J}(\mathbf{x}^{(k)}) \Delta\mathbf{x}^{(k)}
+                                                                    =
+                                                                    -\mathbf{F}(\mathbf{x}^{(k)})
+                                                                    \]
+                                                                    \[
+                                                                    \mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} +
+                                                                    \Delta\mathbf{x}^{(k)}
+                                                                    \]
+                                                                    <p>donde \(\mathbf{J}\) es la matriz jacobiana:</p>
+                                                                    \[
+                                                                    J_{ij} = \frac{\partial f_i}{\partial x_j}
+                                                                    \]
+                                                                </div>
+
+                                                                <h4 class="section-title-2">Condición de Convergencia
+                                                                </h4>
+                                                                <div class="formula-box-2 table-responsive">
+                                                                    \[
+                                                                    \mathbf{J}(\mathbf{x}^*) \text{ debe ser no singular
+                                                                    en la solución
+                                                                    } \mathbf{x}^*
+                                                                    \]
+                                                                </div>
+
+                                                                <h4 class="section-title-2">Ventajas</h4>
+                                                                <ul>
+                                                                    <li>Convergencia cuadrática cerca de la solución
+                                                                    </li>
+                                                                    <li>Eficiente para sistemas con buen comportamiento
+                                                                    </li>
+                                                                    <li>Precisión elevada</li>
+                                                                </ul>
+
+                                                                <h4 class="section-title-2">Desventajas</h4>
+                                                                <ul>
+                                                                    <li>Requiere cálculo del jacobiano</li>
+                                                                    <li>Necesita resolver un sistema lineal en cada
+                                                                        iteración</li>
+                                                                    <li>Sensible a la aproximación inicial</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-12">
+                                                            <div class="custom-box">
+                                                                <h2 class="text-success">Comparación de Métodos</h2>
+
+                                                                <table class="table table-bordered">
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <th>Aspecto</th>
+                                                                            <th>Punto Fijo</th>
+                                                                            <th>Newton-Raphson</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Convergencia</td>
+                                                                            <td>Lineal (lenta)</td>
+                                                                            <td>Cuadrática (rápida)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Cálculo de derivadas</td>
+                                                                            <td>No requiere</td>
+                                                                            <td>Requiere jacobiano</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Complejidad</td>
+                                                                            <td>Baja</td>
+                                                                            <td>Alta</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Estabilidad</td>
+                                                                            <td>Depende de \(\mathbf{G}\)</td>
+                                                                            <td>Depende de aproximación inicial</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Aplicaciones</td>
+                                                                            <td>Sistemas simples</td>
+                                                                            <td>Sistemas complejos</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <h4 class="text-success mt-4">Recomendaciones</h4>
+                                                                <ul>
+                                                                    <li>Usar <strong>Punto Fijo</strong> cuando el
+                                                                        sistema puede
+                                                                        transformarse fácilmente y se espera
+                                                                        convergencia</li>
+                                                                    <li>Usar <strong>Newton-Raphson</strong> cuando se
+                                                                        necesita alta
+                                                                        precisión y se dispone de recursos
+                                                                        computacionales</li>
+                                                                    <li>Considerar <em>métodos híbridos</em> o
+                                                                        <em>modificaciones</em>
+                                                                        (Newton simplificado, Broyden) para casos
+                                                                        intermedios
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" tabindex="-1" id="modal-unidad-2">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">UNIDAD II</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container py-5">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="custom-box">
+                                                <h1 class="text-center mb-4">Interpolación y Aproximación Polinomial
+                                                </h1>
+
+                                                <p class="lead">
+                                                    Técnicas para construir funciones polinomiales que representen
+                                                    conjuntos de datos
+                                                    discretos, ya sea pasando exactamente por los puntos (interpolación)
+                                                    o aproximando
+                                                    la tendencia general (aproximación).
+                                                </p>
+
+                                                <div class="row mt-4">
+                                                    <!-- Método de Lagrange -->
+                                                    <div class="col-md-4">
+                                                        <div class="card method-card">
+                                                            <div class="card-header bg-primary text-white">
+                                                                <h3 class="h5 mb-0">Interpolación de Lagrange</h3>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="section-title">Fórmula</h4>
+                                                                <div class="formula-box table-responsive">
+                                                                    \[
+                                                                    P(x) = \sum_{i=0}^{n} y_i \cdot L_i(x)
+                                                                    \]
+                                                                    \[
+                                                                    L_i(x) = \prod_{\substack{j=0 \\ j \ne i}}^{n}
+                                                                    \frac{x - x_j}{x_i -
+                                                                    x_j}
+                                                                    \]
+                                                                </div>
+
+                                                                <h4 class="section-title">Características</h4>
+                                                                <ul>
+                                                                    <li><strong>Interpolación exacta</strong>: Pasa por
+                                                                        todos los puntos
+                                                                        dados</li>
+                                                                    <li>Polinomio único de grado ≤ n para n+1 puntos
+                                                                    </li>
+                                                                    <li>No requiere resolver sistemas de ecuaciones</li>
+                                                                </ul>
+
+                                                                <h4 class="section-title">Ventajas</h4>
+                                                                <ul class="fa-ul">
+                                                                    <li>Fácil implementación conceptual</li>
+                                                                    <li>Estable para pocos puntos</li>
+                                                                    <li>Útil cuando no se pueden añadir nuevos puntos
+                                                                    </li>
+                                                                </ul>
+
+                                                                <h4 class="section-title">Desventajas</h4>
+                                                                <ul>
+                                                                    <li>Costoso computacionalmente para muchos puntos
+                                                                    </li>
+                                                                    <li>Difícil actualización al añadir nuevos puntos
+                                                                    </li>
+                                                                    <li>Fenómeno de Runge con puntos equidistantes</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Método de Diferencias Divididas -->
+                                                    <div class="col-md-4">
+                                                        <div class="card method-card">
+                                                            <div class="card-header bg-warning text-dark">
+                                                                <h3 class="h5 mb-0">Diferencias Divididas de Newton</h3>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="section-title-2">Fórmula</h4>
+                                                                <div class="formula-box-2 table-responsive">
+                                                                    \[
+                                                                    P(x) = f[x_0] + f[x_0,x_1](x-x_0) + \cdots +
+                                                                    f[x_0,\ldots,x_n]\prod_{i=0}^{n-1}(x-x_i)
+                                                                    \]
+                                                                    \[
+                                                                    f[x_i,\ldots,x_{i+k}] =
+                                                                    \frac{f[x_{i+1},\ldots,x_{i+k}] -
+                                                                    f[x_i,\ldots,x_{i+k-1}]}{x_{i+k}-x_i}
+                                                                    \]
+                                                                </div>
+
+                                                                <h4 class="section-title-2">Características</h4>
+                                                                <ul>
+                                                                    <li><strong>Interpolación exacta</strong> como
+                                                                        Lagrange</li>
+                                                                    <li>Forma anidada eficiente para evaluación</li>
+                                                                    <li>Permite actualización incremental</li>
+                                                                </ul>
+
+                                                                <h4 class="section-title-2">Ventajas</h4>
+                                                                <ul>
+                                                                    <li>Más eficiente que Lagrange</li>
+                                                                    <li>Fácil añadir nuevos puntos</li>
+                                                                    <li>Forma adecuada para implementación computacional
+                                                                    </li>
+                                                                </ul>
+
+                                                                <h4 class="section-title-2">Desventajas</h4>
+                                                                <ul>
+                                                                    <li>Sensible al orden de los puntos</li>
+                                                                    <li>Requiere construcción de tabla de diferencias
+                                                                    </li>
+                                                                    <li>Mismos problemas de oscilación que Lagrange</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Método de Mínimos Cuadrados -->
+                                                    <div class="col-md-4">
+                                                        <div class="card method-card">
+                                                            <div class="card-header bg-success text-white">
+                                                                <h3 class="h5 mb-0">Mínimos Cuadrados</h3>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h4 class="section-title-3">Formulación</h4>
+                                                                <div class="formula-box-3 table-responsive">
+                                                                    \[
+                                                                    \min \sum_{i=1}^m (y_i - P(x_i))^2
+                                                                    \]
+                                                                    \[
+                                                                    P(x) = a_0 + a_1x + \cdots + a_nx^n
+                                                                    \]
+                                                                </div>
+
+                                                                <h4 class="section-title-3">Sistema Normal</h4>
+                                                                <div class="formula-box-3">
+                                                                    \[
+                                                                    \mathbf{A}^T\mathbf{A}\mathbf{a} =
+                                                                    \mathbf{A}^T\mathbf{y}
+                                                                    \]
+                                                                    <p>donde \(A_{ij} = x_i^{j-1}\)</p>
+                                                                </div>
+
+                                                                <h4 class="section-title-3">Características</h4>
+                                                                <ul>
+                                                                    <li><strong>Aproximación</strong>: No pasa
+                                                                        necesariamente por los
+                                                                        puntos</li>
+                                                                    <li>Minimiza el error cuadrático medio</li>
+                                                                    <li>Útil para datos con ruido o errores</li>
+                                                                </ul>
+
+                                                                <h4 class="section-title-3">Ventajas</h4>
+                                                                <ul>
+                                                                    <li>Robusto frente a errores en los datos</li>
+                                                                    <li>Permite controlar el grado del polinomio</li>
+                                                                    <li>Ampliamente usado en estadística y ciencia de
+                                                                        datos</li>
+                                                                </ul>
+
+                                                                <h4 class="section-title-3">Desventajas</h4>
+                                                                <ul>
+                                                                    <li>Solución aproximada, no exacta</li>
+                                                                    <li>Sistema normal puede ser mal condicionado</li>
+                                                                    <li>Elección del grado es crítica</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-12">
+                                                        <div class="custom-box">
+                                                            <h2 class="text-center">Comparación y Aplicaciones</h2>
+
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered table-hover">
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <th>Aspecto</th>
+                                                                            <th>Lagrange</th>
+                                                                            <th>Diferencias Divididas</th>
+                                                                            <th>Mínimos Cuadrados</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><strong>Tipo</strong></td>
+                                                                            <td>Interpolación exacta</td>
+                                                                            <td>Interpolación exacta</td>
+                                                                            <td>Aproximación</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Grado Polinomio</strong></td>
+                                                                            <td>n (para n+1 puntos)</td>
+                                                                            <td>n (para n+1 puntos)</td>
+                                                                            <td>Se elige (generalmente << n)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Eficiencia</strong></td>
+                                                                            <td>O(n²) operaciones</td>
+                                                                            <td>O(n²) pero más eficiente</td>
+                                                                            <td>O(mn²) (m puntos, grado n)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Actualización</strong></td>
+                                                                            <td>Difícil</td>
+                                                                            <td>Fácil</td>
+                                                                            <td>Re-calcular todo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Uso típico</strong></td>
+                                                                            <td>Pocos puntos exactos</td>
+                                                                            <td>Interpolación general</td>
+                                                                            <td>Datos experimentales con ruido</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Estabilidad</strong></td>
+                                                                            <td>Problemas con muchos puntos</td>
+                                                                            <td>Mejor que Lagrange</td>
+                                                                            <td>Depende del grado elegido</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                            <h3 class="mt-4">Recomendaciones de Uso</h3>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="card border-primary">
+                                                                        <div class="card-header bg-primary text-white">
+                                                                            <strong>Usar Lagrange cuando:</strong>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <ul>
+                                                                                <li>Se requiere exactitud en puntos
+                                                                                    específicos</li>
+                                                                                <li>El número de puntos es pequeño</li>
+                                                                                <li>No se añadirán nuevos puntos</li>
+                                                                                <li>Implementación simple es prioridad
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="card border-warning">
+                                                                        <div class="card-header bg-warning text-dark">
+                                                                            <strong>Usar Diferencias Divididas
+                                                                                cuando:</strong>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <ul>
+                                                                                <li>Se necesita eficiencia computacional
+                                                                                </li>
+                                                                                <li>Posible adición de nuevos puntos
+                                                                                </li>
+                                                                                <li>Evaluación frecuente del polinomio
+                                                                                </li>
+                                                                                <li>Interpolación exacta es requerida
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="card border-success">
+                                                                        <div class="card-header bg-success text-white">
+                                                                            <strong>Usar Mínimos Cuadrados
+                                                                                cuando:</strong>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <ul>
+                                                                                <li>Los datos tienen ruido o errores
+                                                                                </li>
+                                                                                <li>Se busca tendencia general, no
+                                                                                    exactitud</li>
+                                                                                <li>Hay muchos puntos de datos</li>
+                                                                                <li>Prevención de sobreajuste es
+                                                                                    importante</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <h3 class="mt-4">Consideraciones Importantes</h3>
+                                                            <div class="alert alert-info">
+                                                                <h4 class="alert-heading">Fenómeno de Runge</h4>
+                                                                <p>En interpolación polinomial con puntos equidistantes,
+                                                                    al aumentar el
+                                                                    grado pueden aparecer oscilaciones grandes en los
+                                                                    extremos del
+                                                                    intervalo. Soluciones:</p>
+                                                                <ul>
+                                                                    <li>Usar puntos de Chebyshev para la interpolación
+                                                                    </li>
+                                                                    <li>Emplear interpolación por splines</li>
+                                                                    <li>Considerar aproximación por mínimos cuadrados
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="alert alert-warning">
+                                                                <h4 class="alert-heading">Elección del grado en Mínimos
+                                                                    Cuadrados</h4>
+                                                                <p>Un grado demasiado alto puede llevar a sobreajuste
+                                                                    (overfitting),
+                                                                    mientras que uno demasiado bajo puede no capturar la
+                                                                    tendencia.
+                                                                    Técnicas para seleccionar el grado óptimo:</p>
+                                                                <ul>
+                                                                    <li>Validación cruzada</li>
+                                                                    <li>Análisis de residuos</li>
+                                                                    <li>Criterios de información (AIC, BIC)</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" tabindex="-1" id="modal-unidad-3">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container py-5">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="text-center mb-5">
+                                                <h1>Métodos de Integración Numérica</h1>
+                                                <p class="lead">Aproximación del área bajo la curva para integrales
+                                                    definidas</p>
+                                            </div>
+
+                                            <!-- Métodos en Cards -->
+                                            <div class="row">
+                                                <!-- Regla del Trapecio -->
+                                                <div class="col-md-4">
+                                                    <div class="card method-card border-primary">
+                                                        <div class="card-header bg-primary text-white">
+                                                            <h3>Regla del Trapecio</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Fórmula Simple</h5>
+                                                            <div class="formula-box table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{h}{2}[f(a) + f(b)] \]
+                                                                <p class="mb-0">donde \( h = b - a \)</p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Fórmula Compuesta</h5>
+                                                            <div class="formula-box table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{h}{2}\left[f(a) +
+                                                                2\sum_{i=1}^{n-1}f(x_i) + f(b)\right] \]
+                                                                <p class="mb-0">con \( h = \frac{b-a}{n} \), \( x_i = a
+                                                                    + ih \)</p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Error de Truncamiento</h5>
+                                                            <p class="error-term">\( E_T =
+                                                                -\frac{(b-a)^3}{12n^2}f''(\xi) \), \( \xi \in
+                                                                [a,b] \)</p>
+
+                                                            <div class="mt-3">
+                                                                <h5>Características:</h5>
+                                                                <ul>
+                                                                    <li>Aproxima con rectas (polinomios de grado 1)</li>
+                                                                    <li>Error proporcional a \( h^2 \)</li>
+                                                                    <li>Exacta para polinomios de grado ≤ 1</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Simpson 1/3 -->
+                                                <div class="col-md-4">
+                                                    <div class="card method-card border-warning">
+                                                        <div class="card-header bg-warning text-dark">
+                                                            <h3>Regla de Simpson 1/3</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Fórmula Simple</h5>
+                                                            <div class="formula-box-2 table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{h}{3}[f(a) + 4f(c) +
+                                                                f(b)] \]
+                                                                <p class="mb-0">donde \( h = \frac{b-a}{2} \), \( c =
+                                                                    \frac{a+b}{2} \)
+                                                                </p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Fórmula Compuesta</h5>
+                                                            <div class="formula-box-2 table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{h}{3}\left[f(a) +
+                                                                4\sum_{\substack{i=1
+                                                                \\ i \text{ impar}}}^{n-1}f(x_i) + 2\sum_{\substack{i=2
+                                                                \\ i \text{
+                                                                par}}}^{n-2}f(x_i) + f(b)\right] \]
+                                                                <p class="mb-0">con \( n \) par, \( h = \frac{b-a}{n} \)
+                                                                </p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Error de Truncamiento</h5>
+                                                            <p class="error-term">\( E_S =
+                                                                -\frac{(b-a)^5}{180n^4}f^{(4)}(\xi) \), \(
+                                                                \xi \in [a,b] \)</p>
+
+                                                            <div class="mt-3">
+                                                                <h5>Características:</h5>
+                                                                <ul>
+                                                                    <li>Aproxima con parábolas (polinomios de grado 2)
+                                                                    </li>
+                                                                    <li>Error proporcional a \( h^4 \)</li>
+                                                                    <li>Exacta para polinomios de grado ≤ 3</li>
+                                                                    <li>Requiere número par de intervalos</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Simpson 3/8 -->
+                                                <div class="col-md-4">
+                                                    <div class="card method-card border-success">
+                                                        <div class="card-header bg-success text-white">
+                                                            <h3>Regla de Simpson 3/8</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Fórmula Simple</h5>
+                                                            <div class="formula-box-3 table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{3h}{8}[f(a) + 3f(a+h) +
+                                                                3f(a+2h) +
+                                                                f(b)] \]
+                                                                <p class="mb-0">donde \( h = \frac{b-a}{3} \)</p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Fórmula Compuesta</h5>
+                                                            <div class="formula-box-3 table-responsive">
+                                                                \[ \int_a^b f(x)dx \approx \frac{3h}{8}\left[f(a) +
+                                                                3\sum_{\substack{i=1
+                                                                \\ i \not\equiv 0 \mod 3}}^{n-1}f(x_i) +
+                                                                2\sum_{\substack{i=3 \\ i
+                                                                \equiv 0 \mod 3}}^{n-3}f(x_i) + f(b)\right] \]
+                                                                <p class="mb-0">con \( n \) múltiplo de 3, \( h =
+                                                                    \frac{b-a}{n} \)</p>
+                                                            </div>
+
+                                                            <h5 class="card-title mt-4">Error de Truncamiento</h5>
+                                                            <p class="error-term">\( E_{S38} =
+                                                                -\frac{(b-a)^5}{6480n^4}f^{(4)}(\xi) \),
+                                                                \( \xi \in [a,b] \)</p>
+
+                                                            <div class="mt-3">
+                                                                <h5>Características:</h5>
+                                                                <ul>
+                                                                    <li>Aproxima con polinomios cúbicos (grado 3)</li>
+                                                                    <li>Error proporcional a \( h^4 \)</li>
+                                                                    <li>Exacta para polinomios de grado ≤ 3</li>
+                                                                    <li>Requiere número de intervalos múltiplo de 3</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Comparación y ejemplos -->
+                                            <div class="row mt-5">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header bg-dark text-white">
+                                                            <h3 class="mb-0">Comparación de Métodos</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered comparison-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Aspecto</th>
+                                                                            <th>Trapecio</th>
+                                                                            <th>Simpson 1/3</th>
+                                                                            <th>Simpson 3/8</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><strong>Grado Polinomio</strong></td>
+                                                                            <td>1 (lineal)</td>
+                                                                            <td>2 (cuadrático)</td>
+                                                                            <td>3 (cúbico)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Orden de Error</strong></td>
+                                                                            <td>O(h²)</td>
+                                                                            <td>O(h⁴)</td>
+                                                                            <td>O(h⁴)</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Exactitud para</strong></td>
+                                                                            <td>Polinomios ≤ grado 1</td>
+                                                                            <td>Polinomios ≤ grado 3</td>
+                                                                            <td>Polinomios ≤ grado 3</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Intervalos Requeridos</strong>
+                                                                            </td>
+                                                                            <td>Cualquier n</td>
+                                                                            <td>n par</td>
+                                                                            <td>n múltiplo de 3</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Evaluaciones de f(x)</strong>
+                                                                            </td>
+                                                                            <td>n+1</td>
+                                                                            <td>n+1</td>
+                                                                            <td>n+1</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Uso recomendado</strong></td>
+                                                                            <td>Primera aproximación rápida</td>
+                                                                            <td>Caso general preferido</td>
+                                                                            <td>Cuando n es múltiplo de 3</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="mt-4">
+                                                                <h4>Ejemplo Práctico</h4>
+                                                                <p>Calcular \( \int_0^1 e^{x^2} dx \) (sin primitiva
+                                                                    elemental) con n=6:
+                                                                </p>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <div class="alert alert-primary">
+                                                                            <h5>Trapecio Compuesto</h5>
+                                                                            <p>h = 1/6 ≈ 0.1667</p>
+                                                                            <p>Resultado ≈ 1.4672</p>
+                                                                            <p>Error estimado: O(10⁻³)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="alert alert-warning">
+                                                                            <h5>Simpson 1/3</h5>
+                                                                            <p>h = 1/6 ≈ 0.1667</p>
+                                                                            <p>Resultado ≈ 1.4627</p>
+                                                                            <p>Error estimado: O(10⁻⁵)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="alert alert-success">
+                                                                            <h5>Simpson 3/8</h5>
+                                                                            <p>h = 1/6 ≈ 0.1667</p>
+                                                                            <p>Resultado ≈ 1.4627</p>
+                                                                            <p>Error estimado: O(10⁻⁵)</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="text-muted">Valor real aproximado:
+                                                                    1.462651745907181...</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Recomendaciones y consideraciones -->
+                                            <div class="row mt-4">
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-header bg-info text-white">
+                                                            <h4>Recomendaciones Prácticas</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <ol>
+                                                                <li><strong>Para resultados rápidos</strong>: Usar
+                                                                    Trapecio compuesto
+                                                                    con n moderado</li>
+                                                                <li><strong>Para máxima precisión</strong>: Simpson 1/3
+                                                                    con n adecuado
+                                                                </li>
+                                                                <li><strong>Cuando n es múltiplo de 3</strong>:
+                                                                    Considerar Simpson 3/8
+                                                                </li>
+                                                                <li><strong>Para funciones periódicas</strong>: Trapecio
+                                                                    puede ser
+                                                                    sorprendentemente bueno</li>
+                                                                <li><strong>Adaptabilidad</strong>: Combinar métodos
+                                                                    según el intervalo
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="card">
+                                                        <div class="card-header bg-secondary text-white">
+                                                            <h4>Consideraciones Importantes</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <ul>
+                                                                <li>El error depende de las derivadas de f(x)</li>
+                                                                <li>Simpson requiere continuidad de f⁽⁴⁾(x) para el
+                                                                    término de error
+                                                                </li>
+                                                                <li>Para funciones con singularidades, considerar
+                                                                    métodos especiales
+                                                                </li>
+                                                                <li>En implementaciones computacionales, usar la forma
+                                                                    anidada para
+                                                                    evaluar polinomios</li>
+                                                                <li>Para alta precisión, considerar cuadratura gaussiana
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="index.html" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="menu-principal.html" class="btn btn-dark">SIGUIENTE</a>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
+</body>
+
+</html>

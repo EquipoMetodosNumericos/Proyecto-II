@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 1</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <script src="../handleMenu.js"></script>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-1" href="#">Métodos Numéricos II</a>
+        </div>
+    </nav>
+    <section id="introduccion">
+        <div class="container text-center mt-5 pt-5" style="max-width: 900px;">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                    <div class="custom-box" align="justify">
+                        <h2 class="mb-4">Unidad II: Interpolación y Aproximación Polinomial</h2>
+                        <p>
+                            En esta unidad se abordan los fundamentos teóricos y prácticos de la
+                            <strong>interpolación</strong> y la <strong>aproximación polinomial</strong>, herramientas
+                            esenciales en el análisis numérico para estimar valores desconocidos a partir de datos
+                            discretos.
+                        </p>
+                        <p>
+                            La interpolación consiste en encontrar una función polinómica que pase exactamente por un
+                            conjunto de puntos dados. Este método es útil cuando se tienen datos experimentales o
+                            tabulados y se requiere construir una función que modele el comportamiento de dichos datos.
+                            Se exploran métodos clásicos como la <strong>interpolación de Lagrange</strong> y la
+                            <strong>interpolación de Newton</strong>, analizando sus ventajas, desventajas y eficiencia
+                            computacional.
+                        </p>
+                        <p>
+                            Por otro lado, la <strong>aproximación polinomial</strong> busca construir una función que
+                            no necesariamente pase por todos los puntos, pero que minimice el error global entre los
+                            datos y la función. En este contexto, se introduce el concepto de <strong>mínimos
+                                cuadrados</strong> y su aplicación en la regresión polinomial, una técnica ampliamente
+                            utilizada en estadística y procesamiento de datos.
+                        </p>
+                        <p>
+                            También se discute el problema del <em>overfitting</em> al utilizar polinomios de alto
+                            grado, y se analiza el teorema de interpolación de Weierstrass que garantiza la existencia
+                            de una aproximación polinómica para funciones continuas.
+                        </p>
+                        <p>
+                            Finalmente, se realiza la implementación de los algoritmos en herramientas computacionales
+                            para visualizar gráficamente los resultados y comparar el comportamiento de diferentes
+                            métodos.
+                        </p>
+                        <p>
+                            Puntos principales:
+                        </p>
+                        <ul>
+                            <li>Aplicar métodos de interpolación para construir funciones polinómicas que ajusten datos
+                                discretos.</li>
+                            <li>Usar técnicas de aproximación por mínimos cuadrados para modelar relaciones funcionales
+                                aproximadas.</li>
+                            <li>Evaluar el error de interpolación y la calidad de una aproximación polinomial.</li>
+                            <li>Implementar soluciones numéricas usando software como Python o MATLAB para visualizar
+                                resultados.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="../menu-principal.html" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="siguiente" class="btn btn-dark">SIGUIENTE</button>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="menu">
+        <div class="container contenedor text-center mt-5 pt-5" style="max-width: 900px;">
+            <div class="container mt-2">
+                <div class="d-flex justify-content-right mb-5">
+                    <button id="volver" class="btn btn-light" style="width: 80px; height: 70px;"><img
+                            src="../img/atras.png" alt="" srcset="" style="width: 50px; height: 50px;"></button>
+                </div>
+                <h1 class="text-center mb-4">Unidad II: Interpolación y Ajuste</h1>
+
+                <div class="d-flex justify-content-center gap-5 mb-4 w-100">
+                    <div class="row">
+                        <div class="col mb-3"><button class="btn btn-primary" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('lagrange')">Lagrange</button></div>
+                        <div class="col mb-3"><button class="btn btn-warning" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('newton')">Diferencias Divididas</button></div>
+                        <div class="col mb-3"><button class="btn btn-success" style="height: 70px; width: 200px;"
+                                onclick="mostrarMetodo('minimos')">Mínimos Cuadrados</button></div>
+                    </div>
+                </div>
+
+                <!-- Lagrange -->
+                <div id="lagrange" class="metodo text-start" style="display: none;">
+                    <div class="container">
+                        <div class="bg-white p-5 shadow rounded-4">
+                            <h1 class="text-primary mb-4">Interpolación de Lagrange</h1>
+
+                            <p>
+                                La interpolación de Lagrange permite construir un polinomio que pasa exactamente por un
+                                conjunto de puntos dados.
+                                Es muy útil cuando se conoce un conjunto de datos discretos y se desea estimar el valor
+                                de la función en un punto intermedio.
+                            </p>
+
+                            <h4 class="section-title">Fórmula del Polinomio de Lagrange</h4>
+                            <div class="formula-box">
+                                \[
+                                P(x) = \sum_{i=0}^{n} y_i \cdot L_i(x)
+                                \]
+                                <br>
+                                \[
+                                L_i(x) = \prod_{\substack{j=0 \\ j \ne i}}^{n} \frac{x - x_j}{x_i - x_j}
+                                \]
+                            </div>
+
+                            <p>
+                                Donde \(L_i(x)\) son los <strong>polinomios base</strong>, construidos para que
+                                \(L_i(x_j) = 1\) si \(i = j\) y 0 en otro caso.
+                            </p>
+
+                            <h4 class="section-title">Ventajas</h4>
+                            <ul>
+                                <li>Fácil de implementar.</li>
+                                <li>No requiere resolver sistemas de ecuaciones.</li>
+                            </ul>
+
+                            <h4 class="section-title">Desventajas</h4>
+                            <ul>
+                                <li>Difícil de actualizar al añadir nuevos puntos.</li>
+                                <li>Puede presentar oscilaciones si hay muchos puntos.</li>
+                            </ul>
+
+                            <h4 class="section-title">¿Para qué se usa?</h4>
+                            <ul>
+                                <li>Interpolar funciones a partir de puntos conocidos.</li>
+                                <li>Estimar valores intermedios en tablas.</li>
+                                <li>Aplicaciones en gráficos, ingeniería y análisis numérico.</li>
+                            </ul>
+                            <div class="d-flex justify-content-center">
+                                <a href="lagrange.html" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diferencias Divididas -->
+                <div id="newton" class="metodo" style="display: none;">
+                    <div class="container">
+                        <div class="container py-5">
+                            <div class="bg-white p-5 shadow rounded-4">
+                                <h1 class="text-warning mb-4">Método de Diferencias Divididas de Newton</h1>
+
+                                <p>
+                                    El método de <strong>diferencias divididas de Newton</strong> permite encontrar el
+                                    polinomio interpolante que pasa por un conjunto de puntos
+                                    \((x_0, y_0), (x_1, y_1), \dots, (x_n, y_n)\) de forma eficiente. A diferencia de
+                                    Lagrange, este método genera una fórmula que se puede actualizar fácilmente si se
+                                    agregan más puntos.
+                                </p>
+
+                                <h4 class="section-title-2">Fórmula del Polinomio de Newton</h4>
+                                <div class="formula-box-2 table-responsive">
+                                    \[
+                                    P(x) = f[x_0] + f[x_0,x_1](x - x_0) + f[x_0,x_1,x_2](x - x_0)(x - x_1) + \dots +
+                                    f[x_0,\dots,x_n](x - x_0)\dots(x - x_{n-1})
+                                    \]
+                                </div>
+
+                                <p>
+                                    Donde \(f[x_i]\), \(f[x_i,x_{i+1}]\), etc., son las <strong>diferencias
+                                        divididas</strong>, calculadas recursivamente con:
+                                </p>
+
+                                <div class="formula-box-2 table-responsive">
+                                    \[
+                                    f[x_i, x_{i+1}] = \frac{f[x_{i+1}] - f[x_i]}{x_{i+1} - x_i}
+                                    \]
+                                    \[
+                                    f[x_i, x_{i+1}, x_{i+2}] = \frac{f[x_{i+1}, x_{i+2}] - f[x_i, x_{i+1}]}{x_{i+2} -
+                                    x_i}
+                                    \]
+                                    <span class="text-muted">Y así sucesivamente.</span>
+                                </div>
+
+                                <h4 class="section-title-2">Ventajas</h4>
+                                <ul class="text-start">
+                                    <li>Fácil de actualizar al agregar nuevos puntos.</li>
+                                    <li>Menor costo computacional que Lagrange para muchos puntos.</li>
+                                </ul>
+
+                                <h4 class="section-title-2">Desventajas</h4>
+                                <ul class="text-start">
+                                    <li>Puede ser laborioso calcular las diferencias si no se usa una tabla.</li>
+                                    <li>El orden de los puntos afecta la forma del polinomio.</li>
+                                </ul>
+
+                                <h4 class="section-title-2">¿Dónde se usa?</h4>
+                                <ul class="text-start">
+                                    <li>Interpolación numérica de funciones.</li>
+                                    <li>Construcción de tablas y aproximaciones.</li>
+                                    <li>Evaluación rápida con forma escalonada (Horner).</li>
+                                </ul>
+                                <div class="d-flex justify-content-center">
+                                    <a href="./newton.html" class="btn btn-warning">SIGUIENTE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mínimos Cuadrados -->
+                <div id="minimos" class="metodo" style="display: none;">
+                    <div class="container">
+                        <div class="container py-5">
+                            <div class="bg-white p-5 shadow rounded-4">
+                                                    <h2 class="text-success">Ajuste por Mínimos Cuadrados</h2>
+
+                                <p>
+                                    El método de <strong>mínimos cuadrados</strong> se usa para encontrar una función
+                                    (normalmente una recta o una parábola) que se aproxime lo mejor posible a un
+                                    conjunto de datos que no necesariamente cumplen con un comportamiento exacto.
+                                </p>
+
+                                <h4 class="section-title-3">Objetivo</h4>
+                                <p>
+                                    Minimizar la suma de los cuadrados de las diferencias entre los valores reales
+                                    \(y_i\) y los valores aproximados \(\hat{y}_i\):
+                                </p>
+
+                                <div class="formula-box-3">
+                                    \[
+                                    S = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+                                    \]
+                                </div>
+
+                                <h4 class="section-title-3">Recta de Ajuste (modelo lineal)</h4>
+                                <p>
+                                    Para ajustar una recta de la forma \(y = a_0 + a_1 x\), los coeficientes se obtienen
+                                    resolviendo el sistema:
+                                </p>
+
+                                <div class="formula-box-3">
+                                    \[
+                                    a_0 n + a_1 \sum x_i = \sum y_i
+                                    \]
+                                    \[
+                                    a_0 \sum x_i + a_1 \sum x_i^2 = \sum x_i y_i
+                                    \]
+                                </div>
+
+                                <p>
+                                    Una vez calculados \(a_0\) y \(a_1\), se tiene la recta que mejor se ajusta a los
+                                    datos según el criterio de mínimos cuadrados.
+                                </p>
+
+                                <h4 class="section-title-3">Ventajas</h4>
+                                <ul class="text-start">
+                                    <li>Ideal cuando los datos tienen ruido o no siguen un patrón exacto.</li>
+                                    <li>Fácil de generalizar a curvas cuadráticas, cúbicas, etc.</li>
+                                </ul>
+
+                                <h4 class="section-title-3">Desventajas</h4>
+                                <ul class="text-start">
+                                    <li>El resultado es una aproximación, no pasa por todos los puntos.</li>
+                                    <li>Puede no ser adecuado si el modelo elegido no representa bien los datos.</li>
+                                </ul>
+
+                                <h4 class="section-title-3">Aplicaciones comunes</h4>
+                                <ul class="text-start">
+                                    <li>Ajuste de curvas en estadísticas y ciencia de datos.</li>
+                                    <li>Predicción de tendencias lineales o no lineales.</li>
+                                    <li>Procesamiento de señales y análisis experimental.</li>
+                                </ul>
+                                <div class="d-flex justify-content-center">
+                                    <a href="minimos.html" class="btn btn-success">SIGUIENTE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</body>
+
+</html>

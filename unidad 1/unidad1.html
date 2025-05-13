@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 1</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }
+        };
+    </script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <script src="../handleMenu.js"></script>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-1" href="#">Métodos Numéricos II</a>
+        </div>
+    </nav>
+    <section id="introduccion">
+        <div class="container text-center mt-5 pt-5" style="max-width: 900px;">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                    <div class="custom-box" align="justify">
+                        <h2 class="h2 mb-4">Unidad I: Introducción a la Solución de Sistemas de Ecuaciones No Lineales
+                        </h2>
+                        <p>
+                            Esta unidad está dedicada al estudio de los sistemas de ecuaciones no lineales, los cuales
+                            constituyen una herramienta fundamental en la modelación de fenómenos complejos en diversas
+                            áreas
+                            del conocimiento, como la ingeniería, la física, la química, la economía, entre otras.
+                        </p>
+                        <p>
+                            A diferencia de los sistemas lineales, los sistemas no lineales no se pueden resolver
+                            utilizando
+                            técnicas algebraicas simples, ya que sus soluciones pueden no ser únicas, no existir o
+                            depender
+                            fuertemente de las condiciones iniciales. Por esta razón, se recurre a métodos numéricos que
+                            permiten aproximar las soluciones con cierto grado de precisión.
+                        </p>
+                        <p>
+                            Entre los métodos más destacados se encuentra el <strong>método de Newton-Raphson</strong>,
+                            que
+                            utiliza derivadas para encontrar sucesivas aproximaciones de las raíces del sistema, y el
+                            <strong>método de punto fijo</strong>, que transforma el sistema original en una forma
+                            iterativa. Se
+                            analizan las condiciones necesarias para garantizar la convergencia de estos métodos y se
+                            estudian
+                            sus ventajas y limitaciones.
+                        </p>
+                        <p>
+                            Además, se introduce el uso de herramientas computacionales como software de cálculo
+                            simbólico y
+                            lenguajes de programación numérica para implementar
+                            algoritmos
+                            que permiten resolver estos sistemas de manera eficiente y práctica.
+                        </p>
+                        <p>
+                            Puntos principales:
+                        </p>
+                        <ul>
+                            <li>Identificar y formular sistemas de ecuaciones no lineales a partir de modelos reales.
+                            </li>
+                            <li>Aplicar métodos iterativos para encontrar soluciones aproximadas.</li>
+                            <li>Analizar la convergencia y estabilidad de los métodos utilizados.</li>
+                            <li>Implementar soluciones computacionales para resolver problemas no lineales.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="../menu-principal.html" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="siguiente" class="btn btn-dark">SIGUIENTE</button>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="menu">
+        <div class="container text-center mt-3 mb-5 pt-5 pt-5" style="max-width: 900px;">
+            <div class="row mt-5">
+                <div class="col-md-12" align="left">
+                    <div class="custom-box" align="center">
+                        <h1 class="h1">MENÚ UNIDAD I</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row fs-2 " style="justify-content: center;">
+                <button id="punto-fijo" class="custom-btn">
+                    <p class="d-block d-md-none">
+                        Punto Fijo
+                    </p>
+                    <p class="d-none d-md-block">
+                        Punto Fijo para Sistemas no Lineales
+                    </p>
+                </button>
+                <button id="newton" class="custom-btn">
+                    <p class="d-block d-md-none">
+                        Newton
+                    </p>
+                    <p class="d-none d-md-block">
+                        Método de Newton
+                    </p>
+                </button>
+            </div>
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="volver" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="section-punto-fijo">
+        <div class="container  mt-3 mb-5 pt-5 pt-5" style="max-width: 900px;">
+            <div class="row mt-5" style="">
+                <h1>Introducción Método de Punto Fijo</h1>
+                <p>
+                    El <strong>método de punto fijo</strong> es una técnica iterativa utilizada para resolver sistemas
+                    de ecuaciones no lineales. Consiste en transformar el sistema original en una forma equivalente:
+                </p>
+                <p style="text-align: center;">
+                    \( x = g(x) \)
+                </p>
+                <p>
+                    Donde <strong>g(x)</strong> es una función vectorial que define la iteración. A partir de una
+                    estimación inicial <em>x<sub>0</sub></em>, se genera una sucesión de aproximaciones:
+                </p>
+                <p style="text-align: center;">
+                    \( x_{n+1} = g(x_n) \)
+                </p>
+                <h2>Pasos generales del método</h2>
+                <ol>
+                    <li>Reescribir el sistema como <em>x = g(x)</em>.</li>
+                    <li>Elegir una estimación inicial <em>x<sub>0</sub></em>.</li>
+                    <li>Iterar usando la relación <em>x<sub>n+1</sub> = g(x<sub>n</sub>)</em>.</li>
+                    <li>Detener cuando la diferencia entre iteraciones sea menor que una tolerancia dada.</li>
+                </ol>
+
+                <h2>Condiciones de convergencia</h2>
+                <p>
+                    Para que el método converja, la función <em>g(x)</em> debe ser contractiva en el intervalo de
+                    interés. Una condición suficiente es que el <strong>norma del Jacobiano de g</strong> sea menor que
+                    1:
+                </p>
+                <p style="text-align: center;">
+                <p style="text-align: center; font-weight: bold;">
+                    \( J_{g(x)} < 1 \) </p>
+
+                        <h2>Ventajas y desventajas</h2>
+                        <ul>
+                            <li><strong>Ventajas:</strong> Fácil de implementar, útil para obtener una primera
+                                aproximación.
+                            </li>
+                            <li><strong>Desventajas:</strong> Requiere transformación adecuada del sistema, puede no
+                                converger
+                                si no se cumple la condición de contracción.</li>
+                        </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align: center;">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="volver-menu" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="siguiente-mpf" class="btn btn-dark">SIGUIENTE</button>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="menu-punto-fijo">
+        <div class="container text-center mt-3 mb-5 pt-5 pt-5" style="max-width: 900px;">
+            <div class="row mt-5">
+                <div class="col-md-12" align="left">
+                    <div class="custom-box" align="center">
+                        <h1 class="h1">MENÚ PUNTO FIJO</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row fs-2 " style="justify-content: center;">
+                <button id="una-ecuacion-punto-fijo" class="custom-btn">
+                    <p class="d-block d-md-none">
+                        Una Ecuación
+                    </p>
+                    <p class="d-none d-md-block">
+                        Ecuación No Lineal
+                    </p>
+                </button>
+                <button id="sistema-punto-fijo" class="custom-btn">
+                    <p class="d-block d-md-none">
+                        Sistema
+                    </p>
+                    <p class="d-none d-md-block">
+                        Sistema de Ecuaciones No Lineales
+                    </p>
+                </button>
+            </div>
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-6">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="volver-mpf" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+        </div>
+    </section>
+    <section id="section-newton">
+        <div class="container  mt-3 mb-5 pt-5 pt-5" style="max-width: 900px;">
+            <div class="row mt-5" style="">
+                <h1>Método de Newton-Raphson</h1>
+                <p>
+                    El <strong>método de Newton-Raphson</strong> es una técnica iterativa utilizada para resolver
+                    sistemas de ecuaciones no lineales de la forma:
+                </p>
+                <p style="text-align: center;">
+                    <strong>F(x) = 0</strong>
+                </p>
+                <p>
+                    Donde <em>F(x)</em> es una función vectorial. A partir de una estimación inicial
+                    <em>x<sub>0</sub></em>, se calcula una sucesión de aproximaciones mediante:
+                </p>
+                <p style="text-align: center;">
+                    <strong>x<sub>n+1</sub> = x<sub>n</sub> - J<sup>-1</sup>(x<sub>n</sub>) · F(x<sub>n</sub>)</strong>
+                </p>
+                <p>
+                    Donde <em>J(x)</em> es el <strong>Jacobiano</strong> de <em>F(x)</em>, es decir, la matriz de
+                    derivadas parciales.
+                </p>
+
+                <h2>Pasos generales del método</h2>
+                <ol>
+                    <li>Definir el sistema <em>F(x) = 0</em>.</li>
+                    <li>Calcular el Jacobiano <em>J(x)</em>.</li>
+                    <li>Elegir una estimación inicial <em>x<sub>0</sub></em>.</li>
+                    <li>Iterar usando la fórmula de Newton:</li>
+                    <p style="text-align: center;">
+                        <strong>x<sub>n+1</sub> = x<sub>n</sub> - J<sup>-1</sup>(x<sub>n</sub>) ·
+                            F(x<sub>n</sub>)</strong>
+                    </p>
+                    <li>Detener cuando <em>||x<sub>n+1</sub> - x<sub>n</sub>||</em> sea menor que una tolerancia.</li>
+                </ol>
+
+                <h2>Ventajas y desventajas</h2>
+                <ul>
+                    <li><strong>Ventajas:</strong> Alta velocidad de convergencia (cuadrática), muy preciso si está
+                        cerca de la raíz.</li>
+                    <li><strong>Desventajas:</strong> Requiere el cálculo y la inversión del Jacobiano, puede no
+                        converger si la estimación inicial no es adecuada.</li>
+                </ul>
+
+                <h2>Recomendaciones</h2>
+                <p>
+                    Es preferible utilizar este método cuando se tiene una buena aproximación inicial y se puede
+                    calcular el Jacobiano de manera eficiente.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align: center;">
+                    <div class="custom-box">
+                        <br><br>
+                        <button id="volver-menu" class="btn btn-danger">VOLVER</a>
+                    </div>
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                    <div class="custom-box">
+                        <br><br>
+                        <a href="newton.html" class="btn btn-dark">SIGUIENTE</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </section>
+</body>
+
+</html>
